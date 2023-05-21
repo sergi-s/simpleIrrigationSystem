@@ -18,4 +18,29 @@ public class Device {
     private PlotOfLand plotOfLand;
 
     // Constructors, getters, and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public PlotOfLand getPlotOfLand() {
+        return plotOfLand;
+    }
+
+    public void setPlotOfLand(PlotOfLand plotOfLand) {
+        this.plotOfLand = plotOfLand;
+    }
+
+    public Device(PlotOfLand plotOfLand) {
+        this.plotOfLand = plotOfLand;
+    }
+
+    public Device(Long id, PlotOfLand plotOfLand) {
+        this.id = id;
+        this.plotOfLand = plotOfLand;
+    }
 }
