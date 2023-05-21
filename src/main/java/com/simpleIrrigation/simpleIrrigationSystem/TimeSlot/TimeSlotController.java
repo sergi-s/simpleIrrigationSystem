@@ -1,5 +1,6 @@
 package com.simpleIrrigation.simpleIrrigationSystem.TimeSlot;
 
+import com.simpleIrrigation.simpleIrrigationSystem.TimeSlot.DTO.TimeSlotRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,10 @@ public class TimeSlotController {
     }
 
     @PostMapping
-    public TimeSlot createTimeSlot(@RequestBody TimeSlot timeSlot) {
+    public TimeSlot createTimeSlot(@RequestBody TimeSlotRequestDTO timeSlot) {
+        System.out.println("()()()()()()()()()()");
+        System.out.println(timeSlot);
+        System.out.println("()()()()()()()()()()");
         return this.timeSlotService.createTimeSlot(timeSlot);
     }
 

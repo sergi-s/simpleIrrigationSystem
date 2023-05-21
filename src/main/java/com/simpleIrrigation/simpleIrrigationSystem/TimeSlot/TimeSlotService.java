@@ -1,31 +1,54 @@
 package com.simpleIrrigation.simpleIrrigationSystem.TimeSlot;
+
+import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLand;
+import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLandRepository;
+import com.simpleIrrigation.simpleIrrigationSystem.TimeSlot.DTO.TimeSlotRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
+@Component
 public class TimeSlotService {
 
     private final TimeSlotRepository timeSlotRepository;
+    private final PlotOfLandRepository plotOfLandRepository;
 
     @Autowired
-    public TimeSlotService(TimeSlotRepository timeSlotRepository) {
+    public TimeSlotService(TimeSlotRepository timeSlotRepository, PlotOfLandRepository plotOfLandRepository) {
         this.timeSlotRepository = timeSlotRepository;
+        this.plotOfLandRepository = plotOfLandRepository;
     }
 
     public List<TimeSlot> getAllTimeSlots() {
-        return timeSlotRepository.findAll();
+        return this.timeSlotRepository.findAll();
     }
 
     public TimeSlot getTimeSlotById(Long id) {
-        return timeSlotRepository.findById(id).orElse(null);
+        return this.timeSlotRepository.findById(id).orElse(null);
     }
 
-    public TimeSlot createTimeSlot(TimeSlot timeSlot) {
-        System.out.println("SADASDASDA");
-        System.out.println(timeSlot);
-        System.out.println("SADASDASDA");
-        return timeSlotRepository.save(timeSlot);
+    public TimeSlot createTimeSlot(TimeSlotRequestDTO timeSlotRequestDTO) {
+        Optional<PlotOfLand> optionalPlotOfLand = this.plotOfLandRepository.findById(timeSlotRequestDTO.getPlotOfLandId());
+
+        if (optionalPlotOfLand.isPresent()) {
+            PlotOfLand plotOfLand = optionalPlotOfLand.get();
+
+            TimeSlot timeSlot = new TimeSlot();
+            timeSlot.setFromTime(timeSlotRequestDTO.getFromTime());
+            timeSlot.setToTime(timeSlotRequestDTO.getToTime());
+            timeSlot.setAmount(timeSlotRequestDTO.getAmount());
+            timeSlot.setPlotOfLand(plotOfLand);
+
+            return timeSlotRepository.save(timeSlot);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "PlotOfLand not found");
+        }
     }
+
 
     public TimeSlot updateTimeSlot(Long id, TimeSlot timeSlotDetails) {
         TimeSlot timeSlot = timeSlotRepository.findById(id).orElse(null);

@@ -1,9 +1,11 @@
 package com.simpleIrrigation.simpleIrrigationSystem.SensorDevice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DeviceService {
     private final DeviceRepository deviceRepository;
 
