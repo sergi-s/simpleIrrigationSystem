@@ -4,8 +4,7 @@ import java.time.LocalDateTime;
 
 public class TimeSlotRequestDTO {
 
-    private long plotOfLandId;
-
+    private Long plotOfLandId;
 
     private LocalDateTime fromTime;
 
@@ -13,11 +12,11 @@ public class TimeSlotRequestDTO {
 
     private Double amount;
 
-    public long getPlotOfLandId() {
+    public Long getPlotOfLandId() {
         return plotOfLandId;
     }
 
-    public void setPlotOfLandId(long plotOfLandId) {
+    public void setPlotOfLandId(Long plotOfLandId) {
         this.plotOfLandId = plotOfLandId;
     }
 
@@ -48,7 +47,7 @@ public class TimeSlotRequestDTO {
     TimeSlotRequestDTO(){
 
     }
-    public TimeSlotRequestDTO(long plotOfLandId, LocalDateTime fromTime, LocalDateTime toTime, Double amount) {
+    public TimeSlotRequestDTO(Long plotOfLandId, LocalDateTime fromTime, LocalDateTime toTime, Double amount) {
         this.plotOfLandId = plotOfLandId;
         this.fromTime = fromTime;
         this.toTime = toTime;

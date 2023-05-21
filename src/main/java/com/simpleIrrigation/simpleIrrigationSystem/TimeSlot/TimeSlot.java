@@ -21,9 +21,8 @@ public class TimeSlot {
     private LocalDateTime toTime;
     private double amount; // assuming amount in liters
 
-    public TimeSlot(){
+    public TimeSlot(){}
 
-    }
     public TimeSlot(Long id, PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
         this.id = id;
         this.plotOfLand = plotOfLand;
@@ -32,12 +31,12 @@ public class TimeSlot {
         this.amount = amount;
     }
 
-    public TimeSlot(PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
-        this.plotOfLand = plotOfLand;
-        this.fromTime = fromTime;
-        this.toTime = toTime;
-        this.amount = amount;
-    }
+//    public TimeSlot(PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
+//        this.plotOfLand = plotOfLand;
+//        this.fromTime = fromTime;
+//        this.toTime = toTime;
+//        this.amount = amount;
+//    }
 
     public PlotOfLand getPlotOfLand() {
         return plotOfLand;
@@ -69,6 +68,14 @@ public class TimeSlot {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

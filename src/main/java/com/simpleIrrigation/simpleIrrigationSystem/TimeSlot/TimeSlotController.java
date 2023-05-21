@@ -29,9 +29,6 @@ public class TimeSlotController {
 
     @PostMapping
     public TimeSlot createTimeSlot(@RequestBody TimeSlotRequestDTO timeSlot) {
-        System.out.println("()()()()()()()()()()");
-        System.out.println(timeSlot);
-        System.out.println("()()()()()()()()()()");
         return this.timeSlotService.createTimeSlot(timeSlot);
     }
 
