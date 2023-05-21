@@ -1,12 +1,13 @@
 package com.simpleIrrigation.simpleIrrigationSystem.Device;
 
+import com.simpleIrrigation.simpleIrrigationSystem.Device.DTO.DeviceRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/devices")
+@RequestMapping("/device")
 public class DeviceController {
 
     private final DeviceService deviceService;
@@ -27,8 +28,8 @@ public class DeviceController {
     }
 
     @PostMapping
-    public Device createDevice(@RequestBody Device device) {
-        return this.deviceService.createDevice(device);
+    public Device createDevice(@RequestBody DeviceRequestDTO deviceRequestDTO) {
+        return this.deviceService.createDevice(deviceRequestDTO);
     }
 
     @PutMapping("/{id}")
