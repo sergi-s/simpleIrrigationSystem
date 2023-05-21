@@ -1,49 +1,43 @@
 package com.simpleIrrigation.simpleIrrigationSystem.TimeSlot;
+
 import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
-        import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/time-slots")
 public class TimeSlotController {
 
-    private final TimeSlotRepository timeSlotRepository;
+    private final TimeSlotService timeSlotService;
 
     @Autowired
-    public TimeSlotController(TimeSlotRepository timeSlotRepository) {
-        this.timeSlotRepository = timeSlotRepository;
+    public TimeSlotController(TimeSlotService timeSlotService) {
+        this.timeSlotService = timeSlotService;
     }
 
     @GetMapping
     public List<TimeSlot> getAllTimeSlots() {
-        return timeSlotRepository.findAll();
+        return this.timeSlotService.getAllTimeSlots();
     }
 
     @GetMapping("/{id}")
     public TimeSlot getTimeSlotById(@PathVariable Long id) {
-        return timeSlotRepository.findById(id).orElse(null);
+        return this.timeSlotService.getTimeSlotById(id);
     }
 
     @PostMapping
     public TimeSlot createTimeSlot(@RequestBody TimeSlot timeSlot) {
-        return timeSlotRepository.save(timeSlot);
+        return this.timeSlotService.createTimeSlot(timeSlot);
     }
 
     @PutMapping("/{id}")
     public TimeSlot updateTimeSlot(@PathVariable Long id, @RequestBody TimeSlot timeSlotDetails) {
-        TimeSlot timeSlot = timeSlotRepository.findById(id).orElse(null);
-        if (timeSlot != null) {
-            timeSlot.setPlotOfLand(timeSlotDetails.getPlotOfLand());
-            timeSlot.setFromTime(timeSlotDetails.getFromTime());
-            timeSlot.setToTime(timeSlotDetails.getToTime());
-            timeSlot.setAmount(timeSlotDetails.getAmount());
-            return timeSlotRepository.save(timeSlot);
-        }
-        return null;
+        return this.timeSlotService.updateTimeSlot(id, timeSlotDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTimeSlot(@PathVariable Long id) {
-        timeSlotRepository.deleteById(id);
+        this.timeSlotService.deleteTimeSlot(id);
     }
 }

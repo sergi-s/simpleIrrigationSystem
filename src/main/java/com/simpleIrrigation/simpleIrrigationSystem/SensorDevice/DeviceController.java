@@ -2,46 +2,42 @@ package com.simpleIrrigation.simpleIrrigationSystem.SensorDevice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/devices")
 public class DeviceController {
 
-    private final DeviceRepository deviceRepository;
+    private final DeviceService deviceService;
 
     @Autowired
-    public DeviceController(DeviceRepository deviceRepository) {
-        this.deviceRepository = deviceRepository;
+    public DeviceController(DeviceService deviceService) {
+        this.deviceService = deviceService;
     }
 
     @GetMapping
     public List<Device> getAllDevices() {
-        return deviceRepository.findAll();
+        return this.deviceService.getAllDevices();
     }
 
     @GetMapping("/{id}")
     public Device getDeviceById(@PathVariable Long id) {
-        return deviceRepository.findById(id).orElse(null);
+        return this.deviceService.getDeviceById(id);
     }
 
     @PostMapping
     public Device createDevice(@RequestBody Device device) {
-        return deviceRepository.save(device);
+        return this.deviceService.createDevice(device);
     }
 
     @PutMapping("/{id}")
     public Device updateDevice(@PathVariable Long id, @RequestBody Device deviceDetails) {
-        Device device = deviceRepository.findById(id).orElse(null);
-        if (device != null) {
-            device.setPlotOfLand(deviceDetails.getPlotOfLand());
-            return deviceRepository.save(device);
-        }
-        return null;
+        return this.deviceService.updateDevice(id, deviceDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deleteDevice(@PathVariable Long id) {
-        deviceRepository.deleteById(id);
+        this.deviceService.deleteDevice(id);
     }
 }

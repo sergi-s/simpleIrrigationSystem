@@ -1,47 +1,43 @@
 package com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand;
+
 import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
-        import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/plot-of-lands")
 public class PlotOfLandController {
 
-    private final PlotOfLandRepository plotOfLandRepository;
+    private final PlotOfLandService plotOfLandService;
 
     @Autowired
-    public PlotOfLandController(PlotOfLandRepository plotOfLandRepository) {
-        this.plotOfLandRepository = plotOfLandRepository;
+    public PlotOfLandController(PlotOfLandService plotOfLandService, PlotOfLandService plotOfLandService1) {
+        this.plotOfLandService = plotOfLandService1;
     }
 
     @GetMapping
     public List<PlotOfLand> getAllPlotOfLands() {
-        return plotOfLandRepository.findAll();
+        return this.plotOfLandService.getAllPlotOfLands();
     }
 
     @GetMapping("/{id}")
     public PlotOfLand getPlotOfLandById(@PathVariable Long id) {
-        return plotOfLandRepository.findById(id).orElse(null);
+        return this.plotOfLandService.getPlotOfLandById(id);
     }
 
     @PostMapping
     public PlotOfLand createPlotOfLand(@RequestBody PlotOfLand plotOfLand) {
-        return plotOfLandRepository.save(plotOfLand);
+        return this.plotOfLandService.createPlotOfLand(plotOfLand);
     }
 
     @PutMapping("/{id}")
     public PlotOfLand updatePlotOfLand(@PathVariable Long id, @RequestBody PlotOfLand plotOfLandDetails) {
-        PlotOfLand plotOfLand = plotOfLandRepository.findById(id).orElse(null);
-        if (plotOfLand != null) {
-            plotOfLand.setName(plotOfLandDetails.getName());
-            plotOfLand.setArea(plotOfLandDetails.getArea());
-            return plotOfLandRepository.save(plotOfLand);
-        }
-        return null;
+        return this.plotOfLandService.updatePlotOfLand(id, plotOfLandDetails);
     }
 
     @DeleteMapping("/{id}")
     public void deletePlotOfLand(@PathVariable Long id) {
-        plotOfLandRepository.deleteById(id);
+        this.deletePlotOfLand(id);
     }
 }

@@ -43,4 +43,12 @@ public class Device {
         this.id = id;
         this.plotOfLand = plotOfLand;
     }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id=" + id +
+                ", plotOfLand=" + plotOfLand +
+                '}';
+    }
 }

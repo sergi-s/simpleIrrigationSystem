@@ -22,7 +22,9 @@ public class PlotOfLand {
     private double area;
     // any additional data
 
+    public PlotOfLand(){
 
+    }
     public PlotOfLand(String name, double area) {
         this.name = name;
         this.area = area;
@@ -56,5 +58,14 @@ public class PlotOfLand {
 
     public void setArea(double area) {
         this.area = area;
+    }
+
+    @Override
+    public String toString() {
+        return "PlotOfLand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", area=" + area +
+                '}';
     }
 }

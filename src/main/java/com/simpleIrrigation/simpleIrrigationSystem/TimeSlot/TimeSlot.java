@@ -15,11 +15,15 @@ public class TimeSlot {
     @ManyToOne
     @JoinColumn(name = "plot_of_land_id")
     private PlotOfLand plotOfLand;
-
+    @Temporal( TemporalType.TIMESTAMP )
     private LocalDateTime fromTime;
+    @Temporal( TemporalType.TIMESTAMP )
     private LocalDateTime toTime;
     private double amount; // assuming amount in liters
 
+    public TimeSlot(){
+
+    }
     public TimeSlot(Long id, PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
         this.id = id;
         this.plotOfLand = plotOfLand;
@@ -65,5 +69,16 @@ public class TimeSlot {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "id=" + id +
+                ", plotOfLand=" + plotOfLand +
+                ", fromTime=" + fromTime +
+                ", toTime=" + toTime +
+                ", amount=" + amount +
+                '}';
     }
 }
