@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  db:
+    container_name: "irrigationSystem_pg"
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: "irrigationSystem"
+      POSTGRES_PASSWORD: "irrigationSystem"
+      POSTGRES_DB: "irrigationSystem"
+    ports:
+      - 5432:5432
+    networks:
+      - app_network
+    volumes:
+      - db_pg_volume:/var/lib/postgres
+
+  pgadmin:
+    container_name: "irrigationSystem_pgAdmin"
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "irrigationSystem@irrigationSystem.com"
+      PGADMIN_DEFAULT_PASSWORD: "irrigationSystem"
+    networks:
+      - app_network
+    ports:
+      - 5050:80
+
+networks:
+  app_network:
+
+volumes:
+  db_pg_volume:
+  cache:
+    driver: local
