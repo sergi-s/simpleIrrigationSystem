@@ -1,14 +1,15 @@
 package com.simpleIrrigation.simpleIrrigationSystem.TimeSlot.DTO;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class TimeSlotRequestDTO {
 
     private Long plotOfLandId;
 
-    private LocalDateTime fromTime;
+    private Date fromTime;
 
-    private LocalDateTime toTime;
+    private Date toTime;
 
     private Double amount;
 
@@ -20,19 +21,19 @@ public class TimeSlotRequestDTO {
         this.plotOfLandId = plotOfLandId;
     }
 
-    public LocalDateTime getFromTime() {
+    public Date getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(Date fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public Date getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(Date toTime) {
         this.toTime = toTime;
     }
 
@@ -47,7 +48,7 @@ public class TimeSlotRequestDTO {
     TimeSlotRequestDTO(){
 
     }
-    public TimeSlotRequestDTO(Long plotOfLandId, LocalDateTime fromTime, LocalDateTime toTime, Double amount) {
+    public TimeSlotRequestDTO(Long plotOfLandId, Date fromTime, Date toTime, Double amount) {
         this.plotOfLandId = plotOfLandId;
         this.fromTime = fromTime;
         this.toTime = toTime;

@@ -3,7 +3,7 @@ package com.simpleIrrigation.simpleIrrigationSystem.TimeSlot;
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLand;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class TimeSlot {
@@ -16,14 +16,14 @@ public class TimeSlot {
     @JoinColumn(name = "plot_of_land_id")
     private PlotOfLand plotOfLand;
     @Temporal( TemporalType.TIMESTAMP )
-    private LocalDateTime fromTime;
+    private Date fromTime;
     @Temporal( TemporalType.TIMESTAMP )
-    private LocalDateTime toTime;
+    private Date toTime;
     private double amount; // assuming amount in liters
 
     public TimeSlot(){}
 
-    public TimeSlot(Long id, PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
+    public TimeSlot(Long id, PlotOfLand plotOfLand, Date fromTime, Date toTime, double amount) {
         this.id = id;
         this.plotOfLand = plotOfLand;
         this.fromTime = fromTime;
@@ -46,19 +46,19 @@ public class TimeSlot {
         this.plotOfLand = plotOfLand;
     }
 
-    public LocalDateTime getFromTime() {
+    public Date getFromTime() {
         return fromTime;
     }
 
-    public void setFromTime(LocalDateTime fromTime) {
+    public void setFromTime(Date fromTime) {
         this.fromTime = fromTime;
     }
 
-    public LocalDateTime getToTime() {
+    public Date getToTime() {
         return toTime;
     }
 
-    public void setToTime(LocalDateTime toTime) {
+    public void setToTime(Date toTime) {
         this.toTime = toTime;
     }
 

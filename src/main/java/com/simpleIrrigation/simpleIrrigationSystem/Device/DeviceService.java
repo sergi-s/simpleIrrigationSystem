@@ -3,6 +3,7 @@ package com.simpleIrrigation.simpleIrrigationSystem.Device;
 import com.simpleIrrigation.simpleIrrigationSystem.Device.DTO.DeviceRequestDTO;
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLand;
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLandRepository;
+import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,8 @@ import java.util.Optional;
 @Component
 public class DeviceService {
     private final DeviceRepository deviceRepository;
-    private final PlotOfLandRepository plotOfLandRepository;
 
+    private final PlotOfLandRepository plotOfLandRepository;
     @Autowired
     public DeviceService(DeviceRepository deviceRepository, PlotOfLandRepository plotOfLandRepository) {
         this.deviceRepository = deviceRepository;
@@ -32,7 +33,7 @@ public class DeviceService {
 
     public Device createDevice(DeviceRequestDTO deviceRequestDTO) {
 
-        Optional<PlotOfLand> optionalPlotOfLand = this.plotOfLandRepository.findById(deviceRequestDTO.getPlotOfLandId());
+        Optional<PlotOfLand> optionalPlotOfLand = Optional.ofNullable(this.plotOfLandRepository.getById(deviceRequestDTO.getPlotOfLandId()));
 
         if (optionalPlotOfLand.isPresent()) {
             PlotOfLand plotOfLand = optionalPlotOfLand.get();
@@ -57,5 +58,11 @@ public class DeviceService {
 
     public void deleteDevice(Long id) {
         deviceRepository.deleteById(id);
+    }
+
+    public void sendRequestToDevice(Long deviceId) {
+        // Simulate sending a request to the device
+        // In this example, we'll just log a message
+        System.out.println("Sending request to device for plot ID: " + deviceId);
     }
 }

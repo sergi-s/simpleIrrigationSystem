@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +66,10 @@ public class TimeSlotService {
 
     public void deleteTimeSlot(Long id) {
         timeSlotRepository.deleteById(id);
+    }
+
+    public List<TimeSlot> findByFromTime(Date startTime){
+        return  this.timeSlotRepository.findByFromTime(startTime);
     }
 }
 
