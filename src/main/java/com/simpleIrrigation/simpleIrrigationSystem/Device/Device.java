@@ -1,10 +1,9 @@
-package com.simpleIrrigation.simpleIrrigationSystem.SensorDevice;
+package com.simpleIrrigation.simpleIrrigationSystem.Device;
 
 import jakarta.persistence.*;
 
 
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLand;
-import jakarta.persistence.*;
 
 @Entity
 public class Device {
