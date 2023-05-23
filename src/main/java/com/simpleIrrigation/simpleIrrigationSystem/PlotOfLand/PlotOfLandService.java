@@ -1,5 +1,6 @@
 package com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand;
 
+import com.simpleIrrigation.simpleIrrigationSystem.Device.Device;
 import com.simpleIrrigation.simpleIrrigationSystem.Device.DeviceService;
 import com.simpleIrrigation.simpleIrrigationSystem.TimeSlot.TimeSlot;
 import com.simpleIrrigation.simpleIrrigationSystem.TimeSlot.TimeSlotService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @EnableScheduling
@@ -76,7 +78,11 @@ public class PlotOfLandService {
 
     private void executeJob(TimeSlot timeSlot) {
         // notify the device
-        this.deviceService.getDeviceByPlotOfLandId(timeSlot.getPlotOfLand().getId());
-        this.deviceService.sendRequestToDevice(timeSlot.getPlotOfLand().getId());
+        Optional<Device> device = Optional.ofNullable(timeSlot.getPlotOfLand().getDevice());
+        if (device.isPresent()) {
+            this.deviceService.sendRequestToDevice(device.get());
+        } else {
+            System.out.println("This Plot Of Land Has not any device so we cant send the Irrigation command");
+        }
     }
 }

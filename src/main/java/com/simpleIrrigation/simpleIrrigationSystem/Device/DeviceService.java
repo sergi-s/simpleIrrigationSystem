@@ -65,9 +65,9 @@ public class DeviceService {
         return deviceRepository.findByPlotOfLandId(id);
     }
 
-    public void sendRequestToDevice(Long deviceId) {
+    public void sendRequestToDevice(Device device) {
         // Simulate sending a request to the device
         // In this example, we'll just log a message
-        System.out.println("Sending request to device for plot ID: " + deviceId);
+        System.out.println("Sending request to device for plot ID: " + device.getId());
     }
 }
