@@ -1,5 +1,7 @@
 package com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand;
 
+import com.simpleIrrigation.simpleIrrigationSystem.Device.Device;
+import com.simpleIrrigation.simpleIrrigationSystem.Device.DeviceRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +11,21 @@ import java.util.List;
 @Configuration
 public class PlotOfLandConfig {
     @Bean
-    CommandLineRunner commandLineRunner(PlotOfLandRepository repository) {
+    CommandLineRunner commandLineRunner(PlotOfLandRepository plotOfLandRepository, DeviceRepository deviceRepository) {
         return args -> {
-            PlotOfLand pol2 = new PlotOfLand(2L, "second plot of land", 5000);
+            PlotOfLand plotOfLand = new PlotOfLand();
+            plotOfLand.setName("second plot of land");
+            plotOfLand.setArea(5000.0);
 
+            Device device1 = new Device();
+            device1.setId(1L);
+            device1.setPlotOfLand(plotOfLand);
 
-            repository.saveAll(List.of(pol2));
+            plotOfLandRepository.save(plotOfLand);
+            deviceRepository.save(device1);
         };
     }
+
+
 
 }

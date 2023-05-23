@@ -17,6 +17,7 @@ public class DeviceService {
     private final DeviceRepository deviceRepository;
 
     private final PlotOfLandRepository plotOfLandRepository;
+
     @Autowired
     public DeviceService(DeviceRepository deviceRepository, PlotOfLandRepository plotOfLandRepository) {
         this.deviceRepository = deviceRepository;
@@ -47,7 +48,7 @@ public class DeviceService {
         }
     }
 
-    public Device updateDevice( Long id, Device deviceDetails) {
+    public Device updateDevice(Long id, Device deviceDetails) {
         Device device = deviceRepository.findById(id).orElse(null);
         if (device != null) {
             device.setPlotOfLand(deviceDetails.getPlotOfLand());
@@ -58,6 +59,10 @@ public class DeviceService {
 
     public void deleteDevice(Long id) {
         deviceRepository.deleteById(id);
+    }
+
+    public Device getDeviceByPlotOfLandId(Long id) {
+        return deviceRepository.findByPlotOfLandId(id);
     }
 
     public void sendRequestToDevice(Long deviceId) {

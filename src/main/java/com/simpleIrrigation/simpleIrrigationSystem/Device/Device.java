@@ -37,7 +37,7 @@ public class Device {
     public Device(PlotOfLand plotOfLand) {
         this.plotOfLand = plotOfLand;
     }
-    Device(){}
+    public Device(){}
 
     public Device(Long id, PlotOfLand plotOfLand) {
         this.id = id;

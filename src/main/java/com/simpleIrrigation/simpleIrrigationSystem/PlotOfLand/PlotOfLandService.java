@@ -66,9 +66,9 @@ public class PlotOfLandService {
                 executeJob(timeSlot);
 
                 timeSlot.setStatus(TimeSlot.IrrigationStatus.IRRIGATED);
-                System.out.println("SHULD UPDATE STATUS"+timeSlot);
+                System.out.println("SHULD UPDATE STATUS" + timeSlot);
                 timeSlotService.updateTimeSlot(timeSlot.getId(), timeSlot);
-                System.out.println("SHULD have UPDATEd STATUS"+timeSlot);
+                System.out.println("SHULD have UPDATEd STATUS" + timeSlot);
 
             }
         }
@@ -76,6 +76,7 @@ public class PlotOfLandService {
 
     private void executeJob(TimeSlot timeSlot) {
         // notify the device
-        deviceService.sendRequestToDevice(timeSlot.getPlotOfLand().getId());
+        this.deviceService.getDeviceByPlotOfLandId(timeSlot.getPlotOfLand().getId());
+        this.deviceService.sendRequestToDevice(timeSlot.getPlotOfLand().getId());
     }
 }

@@ -1,5 +1,6 @@
 package com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand;
 
+import com.simpleIrrigation.simpleIrrigationSystem.Device.Device;
 import jakarta.persistence.*;
 
 @Table
@@ -22,18 +23,37 @@ public class PlotOfLand {
     private double area;
     // any additional data
 
+    @OneToOne(mappedBy = "plotOfLand")
+    private Device device;
+
     public PlotOfLand(){
 
     }
-    public PlotOfLand(String name, double area) {
+
+    public PlotOfLand(long id , String name, double area) {
         this.name = name;
         this.area = area;
     }
 
-    public PlotOfLand(long id, String name, double area) {
+    public PlotOfLand(String name, double area, Device device) {
+        this.name = name;
+        this.area = area;
+        this.device = device;
+    }
+
+    public PlotOfLand(long id, String name, double area, Device device) {
         this.id = id;
         this.name = name;
         this.area = area;
+        this.device = device;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public long getId() {

@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface TimeSlotRepository extends JpaRepository<TimeSlot, Long> {
 
-    //    @Query("SELECT * FROM time_slot WHERE time_slot.from_time < :currentTime")
-//    List<TimeSlot> findByFromTime(Date currentTime);
     @Query("SELECT t FROM TimeSlot t WHERE t.fromTime < :currentTime AND t.status = 1")
     List<TimeSlot> findByFromTime(@Param("currentTime") Date currentTime);
 }
