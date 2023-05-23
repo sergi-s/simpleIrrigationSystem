@@ -20,23 +20,41 @@ public class TimeSlot {
     @Temporal( TemporalType.TIMESTAMP )
     private Date toTime;
     private double amount; // assuming amount in liters
+    @Enumerated(EnumType.ORDINAL)
+    private IrrigationStatus status;
 
-    public TimeSlot(){}
+//    public TimeSlot(PlotOfLand plotOfLand, Date fromTime, Date toTime, double amount, IrrigationStatus status) {
+//        this.plotOfLand = plotOfLand;
+//        this.fromTime = fromTime;
+//        this.toTime = toTime;
+//        this.amount = amount;
+//        this.status = status;
+//    }
 
-    public TimeSlot(Long id, PlotOfLand plotOfLand, Date fromTime, Date toTime, double amount) {
+    public IrrigationStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(IrrigationStatus status) {
+        this.status = status;
+    }
+
+    public TimeSlot(Long id, PlotOfLand plotOfLand, Date fromTime, Date toTime, double amount, IrrigationStatus status) {
         this.id = id;
         this.plotOfLand = plotOfLand;
         this.fromTime = fromTime;
         this.toTime = toTime;
         this.amount = amount;
+        this.status = status;
     }
 
-//    public TimeSlot(PlotOfLand plotOfLand, LocalDateTime fromTime, LocalDateTime toTime, double amount) {
-//        this.plotOfLand = plotOfLand;
-//        this.fromTime = fromTime;
-//        this.toTime = toTime;
-//        this.amount = amount;
-//    }
+    public enum IrrigationStatus {
+        IRRIGATED, // 0 // i.e. irrigation is completed
+        SCHEDULED, // 1 // i.e. pending
+    }
+
+    public TimeSlot(){}
+
 
     public PlotOfLand getPlotOfLand() {
         return plotOfLand;
@@ -86,6 +104,7 @@ public class TimeSlot {
                 ", fromTime=" + fromTime +
                 ", toTime=" + toTime +
                 ", amount=" + amount +
+                ", status=" + status +
                 '}';
     }
 }

@@ -52,19 +52,24 @@ public class PlotOfLandService {
         plotOfLandRepository.deleteById(id);
     }
 
-    @Scheduled(fixedRate = 60000) // Runs every minute
+    @Scheduled(fixedRate = 6000) // Runs every minute
     public void scheduleJobsBasedOnTimeSlots() {
+        // get all slots that due date
         Date now = new Date();
-        System.out.println(now);
         List<TimeSlot> timeSlots = this.timeSlotService.findByFromTime(now);
-        System.out.println(timeSlots);
 
         for (TimeSlot timeSlot : timeSlots) {
             Date fromTime = timeSlot.getFromTime();
 
-            if (now.compareTo(fromTime) == 0) {
+            if (now.compareTo(fromTime) >= 0) {
                 // Execute the job associated with the time slot
                 executeJob(timeSlot);
+
+                timeSlot.setStatus(TimeSlot.IrrigationStatus.IRRIGATED);
+                System.out.println("SHULD UPDATE STATUS"+timeSlot);
+                timeSlotService.updateTimeSlot(timeSlot.getId(), timeSlot);
+                System.out.println("SHULD have UPDATEd STATUS"+timeSlot);
+
             }
         }
     }

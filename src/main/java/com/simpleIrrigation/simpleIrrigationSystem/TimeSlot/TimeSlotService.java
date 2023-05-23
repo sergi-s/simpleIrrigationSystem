@@ -59,6 +59,7 @@ public class TimeSlotService {
             timeSlot.setFromTime(timeSlotDetails.getFromTime());
             timeSlot.setToTime(timeSlotDetails.getToTime());
             timeSlot.setAmount(timeSlotDetails.getAmount());
+            timeSlot.setStatus(timeSlotDetails.getStatus());
             return timeSlotRepository.save(timeSlot);
         }
         return null;
@@ -68,8 +69,8 @@ public class TimeSlotService {
         timeSlotRepository.deleteById(id);
     }
 
-    public List<TimeSlot> findByFromTime(Date startTime){
-        return  this.timeSlotRepository.findByFromTime(startTime);
+    public List<TimeSlot> findByFromTime(Date startTime) {
+        return this.timeSlotRepository.findByFromTime(startTime);
     }
 }
 
