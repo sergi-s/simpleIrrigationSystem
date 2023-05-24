@@ -74,7 +74,7 @@ public class PlotOfLandService {
         }
     }
 
-    private void executeJob(TimeSlot timeSlot) {
+    public void executeJob(TimeSlot timeSlot) {
         // notify the device
         Optional<Device> device = Optional.ofNullable(timeSlot.getPlotOfLand().getDevice());
         if (device.isPresent()) {

@@ -6,7 +6,7 @@ public class DeviceRequestDTO {
 
     private Long plotOfLandId;
 
-    DeviceRequestDTO(){}
+    public DeviceRequestDTO(){}
     public DeviceRequestDTO(Long id, Long plotOfLandId) {
         this.id = id;
         this.plotOfLandId = plotOfLandId;
