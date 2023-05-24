@@ -68,9 +68,7 @@ public class PlotOfLandService {
                 executeJob(timeSlot);
 
                 timeSlot.setStatus(TimeSlot.IrrigationStatus.IRRIGATED);
-                System.out.println("SHULD UPDATE STATUS" + timeSlot);
                 timeSlotService.updateTimeSlot(timeSlot.getId(), timeSlot);
-                System.out.println("SHULD have UPDATEd STATUS" + timeSlot);
 
             }
         }
@@ -82,7 +80,7 @@ public class PlotOfLandService {
         if (device.isPresent()) {
             this.deviceService.sendRequestToDevice(device.get());
         } else {
-            System.out.println("This Plot Of Land Has not any device so we cant send the Irrigation command");
+            System.out.println("This Plot Of Land Has not any device so we cant send the Irrigation command, connect a device and will try again later");
         }
     }
 }

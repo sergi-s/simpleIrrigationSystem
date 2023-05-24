@@ -48,6 +48,10 @@ public class TimeSlotConfig {
             deviceRepository.save(device);
             plotOfLandRepository.save(plotOfLand);
 
+            // Plot Of Land With No Device
+            PlotOfLand plotOfLandWithNoDevice = new PlotOfLand(1L, "plot Of Land With No Device", 5000);
+            plotOfLandRepository.save(plotOfLandWithNoDevice);
+
             // Create a new TimeSlot and associate it with the PlotOfLand
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
@@ -57,11 +61,9 @@ public class TimeSlotConfig {
             Date futureDateTime = calendar.getTime();
 
             TimeSlot timeSlot = new TimeSlot(1L, plotOfLand, currentDateTime, futureDateTime, 50, TimeSlot.IrrigationStatus.SCHEDULED);
-            timeSlotRepository.save(timeSlot);
+            TimeSlot timeSlotWithNoDevice = new TimeSlot(1L, plotOfLandWithNoDevice, currentDateTime, futureDateTime, 50, TimeSlot.IrrigationStatus.SCHEDULED);
+
+            timeSlotRepository.saveAll(List.of(timeSlot,timeSlotWithNoDevice));
         };
     }
-
-
-
-
 }

@@ -13,15 +13,15 @@ public class PlotOfLandConfig {
     @Bean
     CommandLineRunner commandLineRunner(PlotOfLandRepository plotOfLandRepository, DeviceRepository deviceRepository) {
         return args -> {
-            PlotOfLand plotOfLand = new PlotOfLand();
-            plotOfLand.setName("second plot of land");
-            plotOfLand.setArea(5000.0);
+            PlotOfLand secondPlotOfLand = new PlotOfLand();
+            secondPlotOfLand.setName("second plot of land");
+            secondPlotOfLand.setArea(5000.0);
 
             Device device1 = new Device();
             device1.setId(1L);
-            device1.setPlotOfLand(plotOfLand);
+            device1.setPlotOfLand(secondPlotOfLand);
 
-            plotOfLandRepository.save(plotOfLand);
+            plotOfLandRepository.saveAll(List.of(secondPlotOfLand));
             deviceRepository.save(device1);
         };
     }

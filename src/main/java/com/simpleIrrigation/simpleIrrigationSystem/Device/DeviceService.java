@@ -3,7 +3,6 @@ package com.simpleIrrigation.simpleIrrigationSystem.Device;
 import com.simpleIrrigation.simpleIrrigationSystem.Device.DTO.DeviceRequestDTO;
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLand;
 import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLandRepository;
-import com.simpleIrrigation.simpleIrrigationSystem.PlotOfLand.PlotOfLandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
